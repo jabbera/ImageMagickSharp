@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ImageMagickSharp
 {
-	public enum FontWeightType : int
+    public enum FontWeightType : int
 	{
 		ThinStyle = 0,
 		ExtraLightStyle = 40,

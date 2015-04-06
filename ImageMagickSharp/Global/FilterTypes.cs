@@ -1,7 +1,7 @@
 ﻿
 namespace ImageMagickSharp
 {
-    public enum FilterTypes : int
+    internal enum FilterTypes : int
     {
         UndefinedFilter = 0,
 		PointFilter,

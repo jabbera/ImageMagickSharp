@@ -1,7 +1,7 @@
 ﻿
 namespace ImageMagickSharp
 {
-	public enum DistortImageMethodType : int
+	internal enum DistortImageMethodType : int
 	{
 		UndefinedDistortion,
 		AffineDistortion,

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ImageMagickSharp
 {
 
-	public interface IWandCore
+    public interface IWandCore
 	{
 		/// <summary> Clears the exception. </summary>
 		void ClearException();
@@ -38,7 +38,7 @@ namespace ImageMagickSharp
 	}
 
 
-	public abstract class WandCore<T> : IWandCore where T : class,IWandCore, new()
+    public abstract class WandCore<T> : IWandCore where T : class,IWandCore
 	{
 
 		#region [Wand Handle]
@@ -48,7 +48,7 @@ namespace ImageMagickSharp
 
 		/// <summary>
 		/// Initializes a new instance of the ImageMagickSharp.WandCore&lt;T&gt; class. </summary>
-		public WandCore()
+		internal WandCore()
 		{
 		}
 
@@ -56,17 +56,17 @@ namespace ImageMagickSharp
 		/// Initializes a new instance of the WandCore class.
 		/// </summary>
 		/// <param name="handle"></param>
-		public WandCore(IntPtr handle)
+		internal WandCore(IntPtr handle)
 		{
 			Handle = handle;
 		}
 
-		public static implicit operator WandCore<T>(IntPtr wand)
+        public static implicit operator WandCore<T>(IntPtr wand)
 		{
 			return (WandCore<T>)Activator.CreateInstance(typeof(WandCore<T>), wand);
 		}
 
-		public static implicit operator IntPtr(WandCore<T> wand)
+        public static implicit operator IntPtr(WandCore<T> wand)
 		{
 			return wand.Handle;
 		}
@@ -95,7 +95,7 @@ namespace ImageMagickSharp
 		/// <exception cref="WandException"> Thrown when a Wand error condition occurs. </exception>
 		/// <param name="status"> true to status. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool CheckErrorBool(int status)
+        public bool CheckErrorBool(int status)
 		{
 			if (status == Constants.MagickFalse)
 			{
@@ -105,7 +105,7 @@ namespace ImageMagickSharp
 			return true;
 		}
 
-		public bool CheckErrorBool(bool status)
+		internal bool CheckErrorBool(bool status)
 		{
 			if (status == false)
 			{
@@ -119,7 +119,7 @@ namespace ImageMagickSharp
 		/// <exception cref="WandException"> Thrown when a Wand error condition occurs. </exception>
 		/// <param name="status"> true to status. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool CheckError(bool status)
+        public bool CheckError(bool status)
 		{
 			if (status == false)
 			{
@@ -128,8 +128,8 @@ namespace ImageMagickSharp
 
 			return status;
 		}
-		public abstract IntPtr GetException(out int exceptionSeverity);
-		public abstract void ClearException();
+        public abstract IntPtr GetException(out int exceptionSeverity);
+        public abstract void ClearException();
 
 		#endregion
 

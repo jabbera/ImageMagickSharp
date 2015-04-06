@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ImageMagickSharp
 {
-	public enum FontStyleType:int
+    public enum FontStyleType : int
     {
 		NormalStyle, 
 		ItalicStyle, 

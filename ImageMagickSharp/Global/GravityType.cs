@@ -1,7 +1,7 @@
 ﻿
 namespace ImageMagickSharp
 {
-    public enum GravityType : int
+    internal enum GravityType : int
     {
         NorthWestGravity,
         NorthGravity,

@@ -10,7 +10,7 @@ namespace ImageMagickSharp
 	/// <summary> A drawing wand. </summary>
 	/// <seealso cref="T:ImageMagickSharp.WandCore{ImageMagickSharp.DrawingWand}"/>
 	/// <seealso cref="T:System.IDisposable"/>
-	public class DrawingWand : WandCore<DrawingWand>, IDisposable
+    public class DrawingWand : WandCore<DrawingWand>, IDisposable
 	{
 
 		#region [Constructors]
@@ -29,7 +29,7 @@ namespace ImageMagickSharp
 		/// <summary> Initializes a new instance of the ImageMagickSharp.DrawingWand class. </summary>
 		/// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
 		/// <param name="fillColor"> The fill color. </param>
-		public DrawingWand(PixelWand fillColor)
+		internal DrawingWand(PixelWand fillColor)
 		{
 			this.Handle = DrawingWandInterop.NewDrawingWand();
 			if (this.Handle == IntPtr.Zero)
@@ -41,7 +41,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Initializes a new instance of the DrawingWand class. </summary>
 		/// <param name="handle"> . </param>
-		public DrawingWand(IntPtr handle)
+		internal DrawingWand(IntPtr handle)
 			: base(handle)
 		{
 
@@ -52,26 +52,26 @@ namespace ImageMagickSharp
 		#region [Drawing Wand]
 
 		/// <summary> Clears the pixel wand. </summary>
-		public void ClearPixelWand()
+		internal void ClearPixelWand()
 		{
 			DrawingWandInterop.ClearDrawingWand(this);
 		}
 
 		/// <summary> Clone drawing wand. </summary>
 		/// <returns> A DrawingWand. </returns>
-		public DrawingWand CloneDrawingWand()
+		internal DrawingWand CloneDrawingWand()
 		{
 			return new DrawingWand(DrawingWandInterop.CloneDrawingWand(this));
 		}
 
 		/// <summary> Destroys the drawing wand. </summary>
-		public void DestroyDrawingWand()
+		internal void DestroyDrawingWand()
 		{
 			DrawingWandInterop.DestroyDrawingWand(this);
 		}
 
 		/// <summary> Resets the vector graphics. </summary>
-		public void ResetVectorGraphics()
+		internal void ResetVectorGraphics()
 		{
 			DrawingWandInterop.DrawResetVectorGraphics(this);
 		}
@@ -81,7 +81,7 @@ namespace ImageMagickSharp
 		#region [Drawing Wand Methods]
 		/// <summary> Gets or sets the gravity. </summary>
 		/// <value> The gravity. </value>
-		public GravityType Gravity
+		internal GravityType Gravity
 		{
 			get { return DrawingWandInterop.DrawGetGravity(this); }
 			set { DrawingWandInterop.DrawSetGravity(this, value); }
@@ -89,7 +89,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets a value indicating whether the stroke antialias. </summary>
 		/// <value> true if stroke antialias, false if not. </value>
-		public bool StrokeAntialias
+		internal bool StrokeAntialias
 		{
 			get { return DrawingWandInterop.DrawGetStrokeAntialias(this); }
 			set { DrawingWandInterop.DrawSetStrokeAntialias(this, value); }
@@ -97,7 +97,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the fill opacity. </summary>
 		/// <value> The fill opacity. </value>
-		public double FillOpacity
+		internal double FillOpacity
 		{
 			get { return DrawingWandInterop.DrawGetFillOpacity(this); }
 			set { DrawingWandInterop.DrawSetFillOpacity(this, value); }
@@ -105,7 +105,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the opacity. </summary>
 		/// <value> The opacity. </value>
-		public double Opacity
+		internal double Opacity
 		{
 			get { return DrawingWandInterop.DrawGetOpacity(this); }
 			set { DrawingWandInterop.DrawSetOpacity(this, value); }
@@ -113,7 +113,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the vector graphics. </summary>
 		/// <value> The vector graphics. </value>
-		public string VectorGraphics
+		internal string VectorGraphics
 		{
 			get { return DrawingWandInterop.DrawGetVectorGraphics(this); }
 			set { DrawingWandInterop.DrawSetVectorGraphics(this, value); }
@@ -127,7 +127,7 @@ namespace ImageMagickSharp
 		/// <param name="height"> The height. </param>
 		/// <param name="imageWand"> The magickwand. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool DrawComposite(CompositeOperator compose, double x, double y, double width, double height, ImageWand imageWand)
+		internal bool DrawComposite(CompositeOperator compose, double x, double y, double width, double height, ImageWand imageWand)
 		{
 			return this.CheckErrorBool(DrawingWandInterop.DrawComposite(this, (int)compose, x, y, width, height, imageWand.MagickWand.Handle));
 		}
@@ -136,21 +136,21 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="paint_method"> The paint method. </param>
-		public void DrawMatte(double x, double y, PaintMethodType paint_method)
+		internal void DrawMatte(double x, double y, PaintMethodType paint_method)
 		{
 			DrawingWandInterop.DrawMatte(this, x, y, paint_method);
 		}
 
 		/// <summary> Skew x coordinate. </summary>
 		/// <param name="degrees"> The degrees. </param>
-		public void SkewX(double degrees)
+		internal void SkewX(double degrees)
 		{
 			DrawingWandInterop.DrawSkewX(this, degrees);
 		}
 
 		/// <summary> Skew y coordinate. </summary>
 		/// <param name="degrees"> The degrees. </param>
-		public void SkewY(double degrees)
+		internal void SkewY(double degrees)
 		{
 			DrawingWandInterop.DrawSkewY(this, degrees);
 		}
@@ -158,7 +158,7 @@ namespace ImageMagickSharp
 		/// <summary> Translates. </summary>
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
-		public void Translate(double x, double y)
+		internal void Translate(double x, double y)
 		{
 			DrawingWandInterop.DrawTranslate(this, x, y);
 		}
@@ -166,14 +166,14 @@ namespace ImageMagickSharp
 		/// <summary> Scales. </summary>
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
-		public void Scale(double x, double y)
+		internal void Scale(double x, double y)
 		{
 			DrawingWandInterop.DrawScale(this, x, y);
 		}
 
 		/// <summary> Rotates. </summary>
 		/// <param name="degrees"> The degrees. </param>
-		public void Rotate(double degrees)
+		internal void Rotate(double degrees)
 		{
 			DrawingWandInterop.DrawRotate(this, degrees);
 		}
@@ -191,7 +191,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font family. </summary>
 		/// <value> The font family. </value>
-		public string FontFamily
+		internal string FontFamily
 		{
 			get { return DrawingWandInterop.DrawGetFontFamily(this); }
 			set { DrawingWandInterop.DrawSetFontFamily(this, value); }
@@ -199,7 +199,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the size of the font. </summary>
 		/// <value> The size of the font. </value>
-		public double FontSize
+        public double FontSize
 		{
 			get { return DrawingWandInterop.DrawGetFontSize(this); }
 			set { DrawingWandInterop.DrawSetFontSize(this, value); }
@@ -207,7 +207,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font stretch. </summary>
 		/// <value> The font stretch. </value>
-		public FontStretchType FontStretch
+		internal FontStretchType FontStretch
 		{
 			get { return (FontStretchType)DrawingWandInterop.DrawGetFontStretch(this); }
 			set { DrawingWandInterop.DrawSetFontStretch(this, (int)value); }
@@ -215,7 +215,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font style. </summary>
 		/// <value> The font style. </value>
-		public FontStyleType FontStyle
+        public FontStyleType FontStyle
 		{
 			get { return DrawingWandInterop.DrawGetFontStyle(this); }
 			set { DrawingWandInterop.DrawSetFontStyle(this, value); }
@@ -223,7 +223,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font weight. </summary>
 		/// <value> The font weight. </value>
-		public FontWeightType FontWeight
+        public FontWeightType FontWeight
 		{
 			get { return DrawingWandInterop.DrawGetFontWeight(this); }
 			set { DrawingWandInterop.DrawSetFontWeight(this, value); }
@@ -231,7 +231,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets a value indicating whether the text antialias. </summary>
 		/// <value> true if text antialias, false if not. </value>
-		public bool TextAntialias
+        public bool TextAntialias
 		{
 			get { return DrawingWandInterop.DrawGetTextAntialias(this); }
 			set { DrawingWandInterop.DrawSetTextAntialias(this, value); }
@@ -239,7 +239,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the text alignment. </summary>
 		/// <value> The text alignment. </value>
-		public TextAlignType TextAlignment
+        public TextAlignType TextAlignment
 		{
 			get { return DrawingWandInterop.DrawGetTextAlignment(this); }
 			set { DrawingWandInterop.DrawSetTextAlignment(this, value); }
@@ -247,7 +247,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font resolution. </summary>
 		/// <value> The font resolution. </value>
-		public WandPointD FontResolution
+		internal WandPointD FontResolution
 		{
 			get
 			{
@@ -266,7 +266,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="text"> The text. </param>
-		public void DrawAnnotation(double x, double y, string text)
+        public void DrawAnnotation(double x, double y, string text)
 		{
 			DrawingWandInterop.DrawAnnotation(this, x, y, text);
 		}
@@ -289,7 +289,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the color of the border. </summary>
 		/// <value> The color of the border. </value>
-		public PixelWand BorderColor
+		internal PixelWand BorderColor
 		{
 			get
 			{
@@ -302,7 +302,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the color of the stroke. </summary>
 		/// <value> The color of the stroke. </value>
-		public PixelWand StrokeColor
+		internal PixelWand StrokeColor
 		{
 			get
 			{
@@ -315,7 +315,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the stroke opacity. </summary>
 		/// <value> The stroke opacity. </value>
-		public double StrokeOpacity
+		internal double StrokeOpacity
 		{
 			get { return DrawingWandInterop.DrawGetStrokeOpacity(this); }
 			set { DrawingWandInterop.DrawSetStrokeOpacity(this, value); }
@@ -323,7 +323,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the width of the stroke. </summary>
 		/// <value> The width of the stroke. </value>
-		public double StrokeWidth
+		internal double StrokeWidth
 		{
 			get { return DrawingWandInterop.DrawGetStrokeWidth(this); }
 			set { DrawingWandInterop.DrawSetStrokeWidth(this, value); }
@@ -331,7 +331,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the color of the text under. </summary>
 		/// <value> The color of the text under. </value>
-		public PixelWand TextUnderColor
+		internal PixelWand TextUnderColor
 		{
 			get
 			{
@@ -346,7 +346,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="paintmethod"> The paintmethod. </param>
-		public void DrawColor(double x, double y, PaintMethodType paintmethod)
+		internal void DrawColor(double x, double y, PaintMethodType paintmethod)
 		{
 			DrawingWandInterop.DrawColor(this, x, y, paintmethod);
 		}
@@ -371,7 +371,7 @@ namespace ImageMagickSharp
 		/// <param name="y2"> The second y value. </param>
 		/// <param name="rx"> The radius of corner in horizontal direction. </param>
 		/// <param name="ry"> The radius of corner in vertical direction. </param>
-		public void DrawRoundRectangle(double x1, double y1, double x2, double y2, double rx, double ry)
+		internal void DrawRoundRectangle(double x1, double y1, double x2, double y2, double rx, double ry)
 		{
 			DrawingWandInterop.DrawRoundRectangle(this, x1, y1, x2, y2, rx, ry);
 		}
@@ -393,7 +393,7 @@ namespace ImageMagickSharp
 		/// <param name="ry"> The radius of corner in vertical direction. </param>
 		/// <param name="start"> starting rotation in degrees. </param>
 		/// <param name="end"> ending rotation in degrees. </param>
-		public void DrawEllipse(double ox, double oy, double rx, double ry, double start, double end)
+		internal void DrawEllipse(double ox, double oy, double rx, double ry, double start, double end)
 		{
 			DrawingWandInterop.DrawEllipse(this, ox, oy, rx, ry, start, end);
 		}
@@ -405,7 +405,7 @@ namespace ImageMagickSharp
 		/// <param name="ey"> The ending y ordinate of bounding rectangle. </param>
 		/// <param name="sd"> The starting degrees of rotation. </param>
 		/// <param name="ed"> The ending degrees of rotation. </param>
-		public void DrawArc(double sx, double sy, double ex, double ey, double sd, double ed)
+		internal void DrawArc(double sx, double sy, double ex, double ey, double sd, double ed)
 		{
 			DrawingWandInterop.DrawArc(this, sx, sy, ex, ey, sd, ed);
 		}
@@ -415,14 +415,14 @@ namespace ImageMagickSharp
 		/// <param name="sy"> The starting y ordinate of bounding rectangle. </param>
 		/// <param name="ex"> The ending x ordinate of bounding rectangle. </param>
 		/// <param name="ey"> The ending y ordinate of bounding rectangle. </param>
-		public void DrawLine(double sx, double sy, double ex, double ey)
+		internal void DrawLine(double sx, double sy, double ex, double ey)
 		{
 			DrawingWandInterop.DrawLine(this, sx, sy, ex, ey);
 		}
 
 		/// <summary> Draw affine. </summary>
 		/// <param name="affine"> The affine. </param>
-		public void DrawAffine(double[] affine)
+		internal void DrawAffine(double[] affine)
 		{
 			DrawingWandInterop.DrawAffine(this, affine);
 		}
@@ -432,14 +432,14 @@ namespace ImageMagickSharp
 		/// <summary> Gets the exception. </summary>
 		/// <param name="exceptionSeverity"> The exception severity. </param>
 		/// <returns> The exception. </returns>
-		public override IntPtr GetException(out int exceptionSeverity)
+        public override IntPtr GetException(out int exceptionSeverity)
 		{
 			IntPtr exceptionPtr = DrawingWandInterop.DrawGetException(this, out exceptionSeverity);
 			return exceptionPtr;
 		}
 
 		/// <summary> Clears the exception. </summary>
-		public override void ClearException()
+        public override void ClearException()
 		{
 			DrawingWandInterop.DrawClearException(this);
 		}

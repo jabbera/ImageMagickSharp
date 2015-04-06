@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ImageMagickSharp
 {
-	public enum AlphaChannelType : int
+	internal enum AlphaChannelType : int
 	{
 		ActivateAlphaChannel,
 		DeactivateAlphaChannel,

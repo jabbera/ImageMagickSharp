@@ -17,7 +17,7 @@ namespace ImageMagickSharp
 		/// <summary> Initializes a new instance of the MagickBase class. </summary>
 		/// <param name="magickWand"> . </param>
 		/// <param name="index"> The index. </param>
-		public ImageWand(MagickWand magickWand, int index)
+		internal ImageWand(MagickWand magickWand, int index)
 			: base(magickWand)
 		{
 			this.Index = index;
@@ -52,11 +52,11 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets the zero-based index of this object. </summary>
 		/// <value> The index. </value>
-		public int Index { get; private set; }
+		internal int Index { get; private set; }
 
 		/// <summary> Gets or sets the filename of the file. </summary>
 		/// <value> The filename. </value>
-		public string Filename
+		internal string Filename
 		{
 			get { return this.ActivateImageWand(() => WandNativeString.Load(ImageWandInterop.MagickGetImageFilename(this.MagickWand))); }
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageFilename(this.MagickWand, value))); }
@@ -86,7 +86,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the compose. </summary>
 		/// <value> The compose. </value>
-		public CompositeOperator Compose
+		internal CompositeOperator Compose
 		{
 			get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageCompose(this.MagickWand)); }
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageCompose(this.MagickWand, value))); }
@@ -94,7 +94,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the image virtual pixel. </summary>
 		/// <value> The image virtual pixel. </value>
-		public VirtualPixelType ImageVirtualPixel
+		internal VirtualPixelType ImageVirtualPixel
 		{
 			get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageVirtualPixelMethod(this.MagickWand)); }
 			set { this.ActivateImageWand(() => ImageWandInterop.MagickSetImageVirtualPixelMethod(this.MagickWand, value)); }
@@ -102,7 +102,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the alpha channel. </summary>
 		/// <value> The alpha channel. </value>
-		public AlphaChannelType AlphaChannel
+		internal AlphaChannelType AlphaChannel
 		{
 			get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageAlphaChannel(this.MagickWand)); }
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageAlphaChannel(this.MagickWand, value))); }
@@ -110,7 +110,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the gravity. </summary>
 		/// <value> The gravity. </value>
-		public GravityType Gravity
+		internal GravityType Gravity
 		{
 			get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageGravity(this.MagickWand)); }
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageGravity(this.MagickWand, value))); }
@@ -118,7 +118,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the color of the background. </summary>
 		/// <value> The color of the background. </value>
-		public PixelWand BackgroundColor
+		internal PixelWand BackgroundColor
 		{
 			get
 			{
@@ -132,7 +132,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the color of the image border. </summary>
 		/// <value> The color of the image border. </value>
-		public PixelWand ImageBorderColor
+		internal PixelWand ImageBorderColor
 		{
 			get
 			{
@@ -146,7 +146,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the color of the image matte. </summary>
 		/// <value> The color of the image matte. </value>
-		public PixelWand MatteColor
+		internal PixelWand MatteColor
 		{
 			get
 			{
@@ -160,14 +160,14 @@ namespace ImageMagickSharp
 
 		/// <summary> Sets a value indicating whether the matte. </summary>
 		/// <value> true if matte, false if not. </value>
-		public bool Matte
+		internal bool Matte
 		{
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageMatte(this.MagickWand, value))); }
 		}
 
 		/// <summary> Gets or sets the format to use. </summary>
 		/// <value> The format. </value>
-		public string Format
+		internal string Format
 		{
 			get { return this.ActivateImageWand(() => WandNativeString.Load(ImageWandInterop.MagickGetImageFormat(this.MagickWand))); }
 			set
@@ -186,7 +186,7 @@ namespace ImageMagickSharp
 		/// <param name="height"> The height. </param>
 		/// <param name="filter"> Specifies the filter. </param>
 		/// <param name="blur"> The blur. </param>
-		public void ResizeImage(int width, int height, FilterTypes filter, double blur = 1.0)
+		internal void ResizeImage(int width, int height, FilterTypes filter, double blur = 1.0)
 		{
 			this.ActivateImageWand(() => this.MagickWand.CheckError((ImageWandInterop.MagickResizeImage(this.MagickWand, width, height, (int)filter, blur))));
 		}
@@ -204,7 +204,7 @@ namespace ImageMagickSharp
 		/// <param name="height"> The height. </param>
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
-		public void CropImage(int width, int height, int x, int y)
+		internal void CropImage(int width, int height, int x, int y)
 		{
 			this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickCropImage(this.MagickWand, width, height, x, y)));
 		}
@@ -212,7 +212,7 @@ namespace ImageMagickSharp
 		/// <summary> Rotate image. </summary>
 		/// <param name="background"> The background. </param>
 		/// <param name="degrees"> The degrees. </param>
-		public void RotateImage(PixelWand background, double degrees)
+		internal void RotateImage(PixelWand background, double degrees)
 		{
 			this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickRotateImage(this.MagickWand, background, degrees)));
 		}
@@ -221,7 +221,7 @@ namespace ImageMagickSharp
 		/// <param name="crop"> The crop. </param>
 		/// <param name="geomety"> The geomety. </param>
 		/// <returns> A MagickWand. </returns>
-		public MagickWand TransformImage(string crop, string geomety)
+		internal MagickWand TransformImage(string crop, string geomety)
 		{
 			return this.ActivateImageWand(() => new MagickWand(ImageWandInterop.MagickTransformImage(this.MagickWand, crop, geomety)));
 		}
@@ -229,21 +229,21 @@ namespace ImageMagickSharp
 		/// <summary> Transform image colorspace. </summary>
 		/// <param name="colorspace"> The colorspace. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool TransformImageColorspace(ImageColorspaceType colorspace)
+		internal bool TransformImageColorspace(ImageColorspaceType colorspace)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickTransformImageColorspace(this.MagickWand, colorspace)));
 		}
 
 		/// <summary> Determines if we can transpose image. </summary>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool TransposeImage()
+		internal bool TransposeImage()
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickTransposeImage(this.MagickWand)));
 		}
 
 		/// <summary> Determines if we can transverse image. </summary>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool TransverseImage()
+		internal bool TransverseImage()
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickTransverseImage(this.MagickWand)));
 		}
@@ -252,7 +252,7 @@ namespace ImageMagickSharp
 		/// <param name="columns"> The columns. </param>
 		/// <param name="rows"> The rows. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool ThumbnailImage(int columns, int rows)
+		internal bool ThumbnailImage(int columns, int rows)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickThumbnailImage(this.MagickWand, columns, rows)));
 		}
@@ -263,18 +263,18 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <returns> The image region. </returns>
-		public MagickWand GetImageRegion(int width, int height, int x, int y)
+		internal MagickWand GetImageRegion(int width, int height, int x, int y)
 		{
 			return this.ActivateImageWand(() => new MagickWand(ImageWandInterop.MagickGetImageRegion(this.MagickWand, width, height, x, y)));
 		}
 		/// <summary> Flip image. </summary>
-		public void FlipImage()
+		internal void FlipImage()
 		{
 			this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickFlipImage(this.MagickWand)));
 		}
 
 		/// <summary> Flop image. </summary>
-		public void FlopImage()
+		internal void FlopImage()
 		{
 			this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickFlopImage(this.MagickWand)));
 		}
@@ -284,7 +284,7 @@ namespace ImageMagickSharp
 		/// <param name="alpha"> The alpha. </param>
 		/// <param name="fuzz"> The fuzz. </param>
 		/// <param name="invert"> true to invert. </param>
-		public void Transparent(PixelWand target, double alpha, double fuzz, bool invert)
+		internal void Transparent(PixelWand target, double alpha, double fuzz, bool invert)
 		{
 			this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickTransparentPaintImage(this.MagickWand, target, alpha, fuzz, invert ? 1 : 0)));
 		}
@@ -294,7 +294,7 @@ namespace ImageMagickSharp
 		/// <param name="fill"> The fill. </param>
 		/// <param name="fuzz"> The fuzz. </param>
 		/// <param name="invert"> true to invert. </param>
-		public void Fill(PixelWand target, PixelWand fill, double fuzz, bool invert)
+		internal void Fill(PixelWand target, PixelWand fill, double fuzz, bool invert)
 		{
 			this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickOpaquePaintImage(this.MagickWand, target, fill, fuzz, invert ? 1 : 0)));
 		}
@@ -305,7 +305,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool SetImageExtent(int width, int height, int x, int y)
+		internal bool SetImageExtent(int width, int height, int x, int y)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickSetImageExtent(this.MagickWand, width, height)));
 		}
@@ -316,7 +316,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool SetImageExtent(double width, double height, double x, double y)
+		internal bool SetImageExtent(double width, double height, double x, double y)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickSetImageExtent(this.MagickWand, width, height)));
 		}
@@ -327,7 +327,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool ExtentImage(int width, int height, int x, int y)
+		internal bool ExtentImage(int width, int height, int x, int y)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickExtentImage(this.MagickWand, width, height, x, y)));
 		}
@@ -338,7 +338,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool ExtentImage(double width, double height, double x, double y)
+		internal bool ExtentImage(double width, double height, double x, double y)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickExtentImage(this.MagickWand, width, height, x, y)));
 		}
@@ -358,7 +358,7 @@ namespace ImageMagickSharp
 		/// <summary> Color matrix image. </summary>
 		/// <param name="matrix"> The matrix. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool ColorMatrixImage(double[,] matrix)
+		internal bool ColorMatrixImage(double[,] matrix)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickColorMatrixImage(this.MagickWand, matrix)));
 		}
@@ -377,7 +377,7 @@ namespace ImageMagickSharp
 		/// <summary> Label image. </summary>
 		/// <param name="label"> The label. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool LabelImage(string label)
+		internal bool LabelImage(string label)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickLabelImage(this.MagickWand, label)));
 		}
@@ -389,7 +389,7 @@ namespace ImageMagickSharp
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="raise"> true to raise. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool RaiseImage(int width, int height, int x, int y, bool raise)
+		internal bool RaiseImage(int width, int height, int x, int y, bool raise)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickRaiseImage(this.MagickWand, width, height, x, y, raise)));
 		}
@@ -399,7 +399,7 @@ namespace ImageMagickSharp
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool BorderImage(PixelWand bordercolor, int width, int height)
+		internal bool BorderImage(PixelWand bordercolor, int width, int height)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickBorderImage(this.MagickWand, bordercolor, width, height)));
 		}
@@ -410,7 +410,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool ShadowImage(double opacity, double sigma, int x, int y)
+		internal bool ShadowImage(double opacity, double sigma, int x, int y)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShadowImage(this.MagickWand, opacity, sigma, x, y)));
 
@@ -424,7 +424,7 @@ namespace ImageMagickSharp
 		/// <param name="azimuth"> The azimuth. </param>
 		/// <param name="elevation"> The elevation. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool ShadeImage(bool gray, double azimuth, double elevation)
+		internal bool ShadeImage(bool gray, double azimuth, double elevation)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShadeImage(this.MagickWand, gray, azimuth, elevation)));
 		}
@@ -434,7 +434,7 @@ namespace ImageMagickSharp
 		/// <param name="x_shear"> The shear. </param>
 		/// <param name="y_shear"> The shear. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool ShearImage(PixelWand background, double x_shear, double y_shear)
+		internal bool ShearImage(PixelWand background, double x_shear, double y_shear)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShearImage(this.MagickWand, background, x_shear, y_shear)));
 		}
@@ -442,14 +442,14 @@ namespace ImageMagickSharp
 		/// <summary> Sets image clip mask. </summary>
 		/// <param name="clip_mask"> The clip mask. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool SetImageClipMask(MagickWand clip_mask)
+		internal bool SetImageClipMask(MagickWand clip_mask)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageClipMask(this.MagickWand, clip_mask)));
 		}
 
 		/// <summary> Gets image clip mask. </summary>
 		/// <returns> The image clip mask. </returns>
-		public MagickWand GetImageClipMask()
+		internal MagickWand GetImageClipMask()
 		{
 			return this.ActivateImageWand(() => new MagickWand(ImageWandInterop.MagickGetImageClipMask(this.MagickWand)));
 		}
@@ -458,7 +458,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <returns> The image pixel color. </returns>
-		public PixelWand GetImagePixelColor(int x, int y)
+		internal PixelWand GetImagePixelColor(int x, int y)
 		{
 
 			PixelIterator pi = new PixelIterator(this.MagickWand, x, y, 1, 1);
@@ -473,7 +473,7 @@ namespace ImageMagickSharp
 		/// <summary> Negate image. </summary>
 		/// <param name="gray"> true to gray. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool NegateImage(bool gray)
+		internal bool NegateImage(bool gray)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickNegateImage(this.MagickWand, gray)));
 		}
@@ -483,7 +483,7 @@ namespace ImageMagickSharp
 		/// <param name="arguments"> The arguments. </param>
 		/// <param name="bestfit"> true to bestfit. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool DistortImage(DistortImageMethodType method, double[] arguments, bool bestfit)
+		internal bool DistortImage(DistortImageMethodType method, double[] arguments, bool bestfit)
 		{
 			return this.ActivateImageWand(() =>
 			{
@@ -491,7 +491,7 @@ namespace ImageMagickSharp
 				return rValue;
 			});
 		}
-		public bool DistortImage(DistortImageMethodType method, double[,] arguments, bool bestfit)
+		internal bool DistortImage(DistortImageMethodType method, double[,] arguments, bool bestfit)
 		{
 			return this.ActivateImageWand(() =>
 			{
@@ -506,7 +506,7 @@ namespace ImageMagickSharp
 		/// <param name="arguments"> The arguments. </param>
 		/// <param name="bestfit"> true to bestfit. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool DistortImage(DistortImageMethodType method, int number_arguments, string arguments, bool bestfit)
+		internal bool DistortImage(DistortImageMethodType method, int number_arguments, string arguments, bool bestfit)
 		{
 			return this.ActivateImageWand(() =>
 			{
@@ -522,7 +522,7 @@ namespace ImageMagickSharp
 		/// <param name="angle"> The angle. </param>
 		/// <param name="text"> The text. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool AnnotateImage(IntPtr drawing_wand, double x, double y, double angle, string text)
+		internal bool AnnotateImage(IntPtr drawing_wand, double x, double y, double angle, string text)
 		{
 			bool checkErrorBool = false;
 			using (var nString = new WandNativeString(text))
@@ -536,7 +536,7 @@ namespace ImageMagickSharp
 		/// <summary> Gaussian blur image. </summary>
 		/// <param name="radius"> The radius. </param>
 		/// <param name="sigma"> The sigma. </param>
-		public void GaussianBlurImage(double radius, double sigma)
+		internal void GaussianBlurImage(double radius, double sigma)
 		{
 			bool checkErrorBool = false;
 			checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickGaussianBlurImage(this.MagickWand, radius, sigma));
@@ -546,7 +546,7 @@ namespace ImageMagickSharp
 		/// <summary> Adaptive blur image. </summary>
 		/// <param name="radius"> The radius. </param>
 		/// <param name="sigma"> The sigma. </param>
-		public void AdaptiveBlurImage(double radius, double sigma)
+		internal void AdaptiveBlurImage(double radius, double sigma)
 		{
 			bool checkErrorBool = false;
 			checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickAdaptiveBlurImage(this.MagickWand, radius, sigma));
@@ -555,7 +555,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Threshold image. </summary>
 		/// <param name="threshold"> The threshold. </param>
-		public void ThresholdImage(double threshold)
+		internal void ThresholdImage(double threshold)
 		{
 			bool checkErrorBool = false;
 			checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickThresholdImage(this.MagickWand, threshold));
@@ -566,7 +566,7 @@ namespace ImageMagickSharp
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
 		/// <param name="bias"> The bias. </param>
-		public void AdaptiveThresholdImage(int width, int height, double bias)
+		internal void AdaptiveThresholdImage(int width, int height, double bias)
 		{
 			bool checkErrorBool = false;
 			checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickAdaptiveThresholdImage(this.MagickWand, width,height, bias));
@@ -576,7 +576,7 @@ namespace ImageMagickSharp
 		/// <summary> Brightness contrast image. </summary>
 		/// <param name="brightness"> The brightness. </param>
 		/// <param name="contrast"> The contrast. </param>
-		public void BrightnessContrastImage(double brightness, double contrast)
+		internal void BrightnessContrastImage(double brightness, double contrast)
 		{
 			bool checkErrorBool = false;
 			checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickBrightnessContrastImage(this.MagickWand, brightness, contrast));
@@ -586,7 +586,7 @@ namespace ImageMagickSharp
 		/// <summary> Colorize image. </summary>
 		/// <param name="colorize"> The colorize. </param>
 		/// <param name="blend"> The blend. </param>
-		public void ColorizeImage(PixelWand colorize, PixelWand blend)
+		internal void ColorizeImage(PixelWand colorize, PixelWand blend)
 		{
 			bool checkErrorBool = false;
 			checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickColorizeImage(this.MagickWand, colorize, blend));

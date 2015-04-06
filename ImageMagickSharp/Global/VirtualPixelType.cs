@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ImageMagickSharp
 {
-    public enum VirtualPixelType : int
+    internal enum VirtualPixelType : int
 	{
         Undefined = 0,  
         Background = 1,  

@@ -1,7 +1,7 @@
 ﻿
 namespace ImageMagickSharp
 {
-	public enum TextAlignType: int
+    public enum TextAlignType : int
     {
 		UndefinedAlign, 
 		LeftAlign, 
